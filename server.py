@@ -28,8 +28,13 @@ def calculator():
 		elif operator == '*':
 			result = 1.0 * val1 * val2
 		elif operator == '/':
-			result = 1.0 * val1 / val2
-		
+			try:
+				result = 1.0 * val1 / val2
+			except ZeroDivisionError:
+				return '''NaN'''.format()
+		else:
+			return '''Invalid operator or missing, try again.\n'''.format()
+			
 		# Return the result with two decimal places
 		return '''{:.2f}'''.format(result)
 
