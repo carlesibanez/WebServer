@@ -24,3 +24,5 @@ python client.py --ocsv examples/sample.csv --wfile results
 ```
 In both cases the results will be appended to the file results.txt.
 In case all the parameters are passed, first the operation with `val1`, `val2` and `operator` will be sent to the server, followed by the operations from the csv file; all the operations will be added to output txt file.
+## System requirements
+The code has been tested in python 3.6.7, and all the required packages are in requirements.txt
