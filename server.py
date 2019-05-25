@@ -7,9 +7,18 @@ def calculator():
 	if request.method == 'POST':
 		
 		# Store the values and operator passed
-		val1 = float(request.form.get('val1'))
-		val2 = float(request.form.get('val2'))
+		# Check if val1 and val2 are numbers
+		try:
+			val1 = float(request.form.get('val1'))
+			val2 = float(request.form.get('val2'))
+		except ValueError:
+			return '''NaN'''.format()
+			
 		operator = request.form.get('op')
+		
+		#Check if all the needed arguments are present
+		if val1 == None or val2 == None or operator == None:
+			return '''Not enough input parameters. Try again.\n'''.format()
 		
 		# Perform the corresponding operation
 		if operator == '+':
