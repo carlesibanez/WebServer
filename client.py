@@ -42,3 +42,24 @@ if (val1 == None or val2 == None or op == None) and file_csv == None:
 elif (val1 != None and val2 != None and op != None):
 	result = operation(val1, val2, op)
 	print('''{} {} {} = {}'''.format(val1, op, val2, result))
+	
+# In case the user passes csv file name to open, proceed to reading it
+# and storing it in table
+if file_csv != None:
+	table = []
+	# Check if the path to file is correct, if not, notice the user
+	try:
+		with open(file_csv, newline='') as csvfile:
+			reader = csv.reader(csvfile, delimiter=',')
+			for row in reader:
+				table.append(row)
+				
+	except FileNotFoundError:
+		print('File not found. Check path') 
+
+	# For each row in the table, that is a pair of values and an operand, call operation function
+	for row in table:
+		result = operation(row[0], row[2], row[1])
+		print('''{} {} {} = {}'''.format(row[0], row[1], row[2], result))
+
+
