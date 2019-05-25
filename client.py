@@ -56,10 +56,19 @@ if file_csv != None:
 				
 	except FileNotFoundError:
 		print('File not found. Check path') 
-
+	
+	# In case there is an output file specified
+	if output_file != None:
+		f = open(output_file + ".txt", "a") 
+	
 	# For each row in the table, that is a pair of values and an operand, call operation function
 	for row in table:
 		result = operation(row[0], row[2], row[1])
+		if output_file != None:
+			f.write('''{} {} {} = {}\n'''.format(row[0], row[1], row[2], result)) 
 		print('''{} {} {} = {}'''.format(row[0], row[1], row[2], result))
 
+	#Close the file
+	if output_file != None:
+		f.close()
 
