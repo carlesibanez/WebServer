@@ -33,6 +33,10 @@ op = args.operator
 file_csv = args.ocsv
 output_file = args.wfile
 
+# In case there is an output file specified
+if output_file != None:
+	f = open(output_file + ".txt", "a")
+
 # Check what arguments are passed
 # Case with not enough arguments
 if (val1 == None or val2 == None or op == None) and file_csv == None:
@@ -41,6 +45,8 @@ if (val1 == None or val2 == None or op == None) and file_csv == None:
 # Case where there's two values and an operator
 elif (val1 != None and val2 != None and op != None):
 	result = operation(val1, val2, op)
+	if output_file != None:
+			f.write('''{} {} {} = {}\n'''.format(val1, op, val2, result))
 	print('''{} {} {} = {}'''.format(val1, op, val2, result))
 	
 # In case the user passes csv file name to open, proceed to reading it
@@ -55,11 +61,7 @@ if file_csv != None:
 				table.append(row)
 				
 	except FileNotFoundError:
-		print('File not found. Check path') 
-	
-	# In case there is an output file specified
-	if output_file != None:
-		f = open(output_file + ".txt", "a") 
+		print('File not found. Check path')  
 	
 	# For each row in the table, that is a pair of values and an operand, call operation function
 	for row in table:
@@ -68,7 +70,7 @@ if file_csv != None:
 			f.write('''{} {} {} = {}\n'''.format(row[0], row[1], row[2], result)) 
 		print('''{} {} {} = {}'''.format(row[0], row[1], row[2], result))
 
-	#Close the file
-	if output_file != None:
-		f.close()
+#Close the file
+if output_file != None:
+	f.close()
 
